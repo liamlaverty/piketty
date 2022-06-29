@@ -7,6 +7,16 @@ namespace piketty
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            DoUnsafeCode();
+        }
+
+       
+
+        private static unsafe void DoUnsafeCode()
+        {
+
+            Console.Read();
         }
     }
 }
