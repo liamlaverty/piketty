@@ -1,4 +1,6 @@
-# launch by running py .\main.py in the cmd line
+# to launch, open cmd and run: 
+#   cd .\pyketty\
+#   py .\main.py 
 
 x = 2
 if x == 1:
