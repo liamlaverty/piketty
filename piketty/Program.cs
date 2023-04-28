@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace piketty
 {
@@ -9,14 +10,26 @@ namespace piketty
             Console.WriteLine("Hello World!");
 
             DoUnsafeIntCode();
+
+            DoUnsafeArrayCode();
+
+            Console.WriteLine("finished");
+            Console.Read();
+
+
         }
+
+
+        
+        
+
 
 
         private static unsafe void DoUnsafeArrayCode()
         {
             int[] y = new int[] { 3, 4, 5 };
 
-
+       
         }
 
 
@@ -40,7 +53,30 @@ namespace piketty
 
             *ptrX = 102;
             Console.WriteLine($"pointer {nameof(ptrX)} = {numberX} should = 102");
-            Console.Read();
+        }
+    }
+
+
+    public class OtherClass
+    {
+        /// <summary>
+        /// a private int that can't be changed outside
+        /// this class
+        /// </summary>
+        private int ValX { get; }
+
+        public OtherClass(int valX)
+        {
+            ValX = valX;
+        }
+
+
+        /// <summary>
+        /// Just prints x
+        /// </summary>
+        public void PrintValX()
+        {
+            Console.WriteLine($"ValX = {ValX}");
         }
     }
 }
