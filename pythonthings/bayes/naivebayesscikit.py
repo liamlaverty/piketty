@@ -7,3 +7,6 @@ clf.fit(settings.X_train, settings.Y_train)
 
 pred_prob = clf.predict_proba(settings.X_test)
 print('pred_prob:\n', pred_prob)
+
+pred = clf.predict(settings.X_test)
+print('pred:\n', pred)
