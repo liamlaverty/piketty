@@ -1,8 +1,13 @@
 import numpy as np
 from collections import defaultdict
-_data_path = '/workspaces/piketty/pythonthings/datasets/movielens/ratings.csv'
+from pathlib import Path
+# _data_path = '..datasets/movielens/ratings.csv'
 _n_users = 6040
 _n_movies = 37060
+
+_base_path = Path(__file__).parent.parent
+_data_path = _base_path / "./datasets/movielens/ratings.csv"
+
 
 class MovieRating():
     """
@@ -35,7 +40,7 @@ class MovieRating():
         data = np.zeros([n_users,n_movies], dtype=np.float32)
         movie_id_mapping = {}
         movie_n_rating = defaultdict(int)
-        with open(data_path, 'r') as file:
+        with data_path.open() as file: # open(data_path, 'r') as file:
             for line in file.readlines()[1:]:
                 user_id, movie_id, rating, _ = line.split(",")
                 user_id = int(user_id) - 1
