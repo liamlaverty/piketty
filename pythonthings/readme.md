@@ -14,4 +14,4 @@ If you're on a mac, you may need to replace `py` with `python3` in the commands 
 # To generate requirements.txt
 * cd to this directory `.\pythonthings\`
 * run `pip install pipreqs`
-* run cmd `pipreqs --encoding=utf8 --force ./ --ignore .venv,Include,Scripts,Lib --use-local`
+* run cmd `pipreqs --encoding=utf8 --force ./ --ignore .venv,Include,Scripts,Lib --use-local`'
