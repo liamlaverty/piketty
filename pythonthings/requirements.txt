@@ -6,3 +6,4 @@ torchaudio
 gym
 pygame
 gymnasium
+gymnasium[box2d]

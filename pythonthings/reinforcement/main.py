@@ -9,4 +9,3 @@ print(x)
 from gym import envs
 print(envs.registry.keys())
 
-env = gym.make('FrozenLake-v0')
