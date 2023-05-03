@@ -1,5 +1,5 @@
-import numpy as np
 from collections import defaultdict
+from naivebayessettings import NaiveBayesSettings
 
 
 class NaiveBayes: 
@@ -97,18 +97,11 @@ class NaiveBayes:
 
 
 nb = NaiveBayes()
+naivebayessettings = NaiveBayesSettings()
 
-X_train = np.array([
-    [0,1,1],
-    [0,0,1],
-    [0,0,0],
-    [1,1,0]
-])
 
-Y_train = ['Y','N','Y','Y']
-X_test = np.array([[1, 1, 0]])
 
-label_indices = nb.get_label_indices(Y_train)
+label_indices = nb.get_label_indices(naivebayessettings.Y_train)
 print('label_indices:\n', label_indices)
 
 prior = nb.get_prior(label_indices)
@@ -117,9 +110,9 @@ print('prior:\n', prior)
 
 
 smoothing = 1
-likelihood = nb.get_likelihood(X_train, label_indices, smoothing)
+likelihood = nb.get_likelihood(naivebayessettings.X_train, label_indices, smoothing)
 print('Likelihood (smoothing={}):{}'.format(smoothing, likelihood))
 
 
-posterior = nb.get_posterior(X_test, prior, likelihood)
+posterior = nb.get_posterior(naivebayessettings.X_test, prior, likelihood)
 print('Posterior:\n {}'.format(posterior))
