@@ -1,6 +1,9 @@
 import numpy as np
 from collections import defaultdict
 from pathlib import Path
+from sklearn.model_selection import train_test_split as sklearn_train_test_split
+from sklearn.naive_bayes import MultinomialNB
+
 # _data_path = '..datasets/movielens/ratings.csv'
 _n_users = 6040
 _n_movies = 37060
@@ -67,3 +70,45 @@ class MovieRating():
 mr = MovieRating(_n_users, _n_movies, _data_path)
 data, movie_n_rating, movie_id_mapping = mr.load_rating_data(_data_path, _n_users, _n_movies)
 mr.display_distribution(data)
+
+movie_id_most, n_rating_most = sorted(movie_n_rating.items(), 
+    key = lambda d: d[1], reverse=True)[0]
+print(f'Movie ID {movie_id_most} has {n_rating_most} ratings.')
+
+
+
+X_raw = np.delete(data, movie_id_mapping[movie_id_most], axis=1)
+Y_raw = data[:, movie_id_mapping[movie_id_most]]
+X = X_raw[Y_raw > 0]
+Y = Y_raw[Y_raw > 0]
+print(f'shape of X: {X.shape}')
+print(f'shape of Y: {Y.shape}')
+
+mr.display_distribution(Y)
+
+recommend = 3
+Y[Y < recommend] = 0
+Y[Y > recommend] = 1
+n_pos = (Y == 1).sum()
+n_neg = (Y == 0).sum()
+print(f'{n_pos} positive samples and {n_neg} samples')
+
+# from sklearn.model_selection import train_test_split
+sklearn_train_test_split
+X_train, X_test, Y_train, Y_test = sklearn_train_test_split(X,Y,test_size=0.2, random_state=42)
+
+print(len(Y_train), len(Y_test))
+
+
+clf = MultinomialNB(alpha=1.0, fit_prior=True)
+clf.fit(X_train, Y_train)
+
+prediction_prob = clf.predict_proba(X_test)
+print(prediction_prob[0:10])
+
+prediction = clf.predict(X_test)
+print(prediction[:10])
+
+
+accuracy = clf.score(X_test, Y_test)
+print(f'the accuracy is: {accuracy * 100: 0.1f}%')
