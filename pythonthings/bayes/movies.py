@@ -3,6 +3,7 @@ from collections import defaultdict
 from pathlib import Path
 from sklearn.model_selection import train_test_split as sklearn_train_test_split
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import confusion_matrix
 
 # _data_path = '..datasets/movielens/ratings.csv'
 _n_users = 6040
@@ -112,3 +113,5 @@ print(prediction[:10])
 
 accuracy = clf.score(X_test, Y_test)
 print(f'the accuracy is: {accuracy * 100: 0.1f}%')
+
+print(confusion_matrix(Y_test, prediction, labels=[0, 1]))

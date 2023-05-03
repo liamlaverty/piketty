@@ -423,6 +423,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+share/
 lib64/
 parts/
 sdist/
